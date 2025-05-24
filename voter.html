@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voter Page</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #e0ffe0; }
+    #qr-reader { width: 300px; margin: auto; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Scan QR to Vote</h2>
+  <div id="qr-reader"></div>
+  <p id="scan-status"></p>
+  <div id="vote-panel" style="display:none;">
+    <h3>Choose Your Candidate</h3>
+    <ul id="vote-list"></ul>
+  </div>
+
+  <script>
+    let candidates = JSON.parse(localStorage.getItem('candidates')) || [];
+    let votes = JSON.parse(localStorage.getItem('votes')) || {};
+    let voted = JSON.parse(localStorage.getItem('voted')) || {};
+
+    const qr = new Html5Qrcode("qr-reader");
+    qr.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 },
+      qrCode => {
+        qr.stop();
+        const voterId = qrCode.trim();
+        if (voted[voterId]) {
+          document.getElementById('scan-status').textContent = "Already voted.";
+        } else {
+          document.getElementById('scan-status').textContent = "Authenticated: " + voterId;
+          showCandidates(voterId);
+        }
+      },
+      err => { console.warn(err); }
+    );
+
+    function showCandidates(voterId) {
+      const list = document.getElementById('vote-list');
+      list.innerHTML = '';
+      candidates.forEach(name => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        const btn = document.createElement('button');
+        btn.textContent = "Vote";
+        btn.onclick = () => {
+          votes[name] = (votes[name] || 0) + 1;
+          voted[voterId] = true;
+          localStorage.setItem('votes', JSON.stringify(votes));
+          localStorage.setItem('voted', JSON.stringify(voted));
+          alert("Vote cast!");
+          location.reload();
+        };
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+      document.getElementById('vote-panel').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
