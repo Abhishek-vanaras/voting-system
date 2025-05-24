@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voting System | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2b2d42, #1a1c2c);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 30px;
+      text-align: center;
+      background-color: #12131a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .main-content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .button-group a {
+      text-decoration: none;
+      background: #00aaff;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 170, 255, 0.3);
+    }
+
+    .button-group a:hover {
+      background: #007acc;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      background-color: #12131a;
+    }
+
+    @media (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to the Digital Voting System</h1>
+  </header>
+
+  <div class="main-content">
+    <h2>Please select your role</h2>
+    <div class="button-group">
+      <a href="admin.html">Admin Login</a>
+      <a href="voter.html">Voter QR Scan</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Election Commission | Secure & Transparent Voting
+  </footer>
+
+</body>
+</html>
